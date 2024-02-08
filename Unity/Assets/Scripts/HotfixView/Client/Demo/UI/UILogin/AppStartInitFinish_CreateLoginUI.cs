@@ -6,6 +6,9 @@
 		protected override async ETTask Run(Scene root, AppStartInitFinish args)
 		{
 			await UIHelper.Create(root, UIType.UILogin, UILayer.Mid);
+			var computer = root.GetComponent<ComputersComponent>().AddChild<Computer>();
+			computer.AddComponent<PCCaseComponent>();
+			computer.AddComponent<MonitorComponent, int>(50);
 		}
 	}
 }
