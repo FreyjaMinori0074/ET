@@ -19,8 +19,16 @@ namespace ET.Client
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
             root.SceneType = sceneType;
-            
+            // 所以可以走到AppStartInitFinish了
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
+            Log.Debug("Before TestEventStruct");
+            // 类似于上面，抛一下TestEventStruct
+            // 用构造函数赋下值
+            await EventSystem.Instance.PublishAsync(root, new TestEventStruct()
+            {
+                TestValue = 1,
+            });
+            Log.Debug("After TestEventStruct");
         }
     }
 }
